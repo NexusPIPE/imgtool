@@ -1,0 +1,4 @@
+#!/bin/zsh
+# imgtool.sh
+cd ~/imgtool
+pnpm start $@
