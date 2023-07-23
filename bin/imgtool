@@ -1,4 +1,7 @@
 #!/bin/zsh
 # imgtool.sh
+dir=$(pwd)
 cd ~/imgtool
 pnpm start $@
+cd $dir
+cp ~/imgtool/output.png ./

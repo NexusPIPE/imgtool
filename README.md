@@ -3,7 +3,7 @@
 ## 📦 Table of Contents
 
 - [📦 Table of Contents](#-table-of-contents)
-- [� Todo](#-todo)
+- [📝 Todo](#-todo)
 - [📂 Installation](#-installation)
   - [😎 Posix Users (Linux, MacOS, etc)](#-posix-users-linux-macos-etc)
   - [🪟 Windows Users](#-windows-users)
@@ -13,6 +13,7 @@
     - [🪟 Windows Users](#-windows-users-1)
   - [🔧 Config](#-config)
     - [🗔 Specifying a Resolution](#-specifying-a-resolution)
+    - [⏲ Specifying a Timeout](#-specifying-a-timeout)
     - [🧰 Using a custom template](#-using-a-custom-template)
 - [📜 License](#-license)
 
@@ -85,6 +86,14 @@ Add
 --res 1920x1080
 ```
 to your arguments.
+
+#### ⏲ Specifying a Timeout
+
+Add
+```bash
+--timeout 1000
+```
+to your arguments. This will make the CLI wait 1000ms before taking the screenshot, to ensure the background has loaded.
 
 #### 🧰 Using a custom template
 

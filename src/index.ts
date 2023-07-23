@@ -61,10 +61,10 @@ const templ = (template?: string, title = 'NexusPIPE', value = 'Cybersecurity wi
 
     await page.goto('http://127.0.0.1:11634/' + id + '.html', { waitUntil: 'networkidle2' });
 
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, Number((process.argv.find(v => v === '--timeout') ? process.argv[process.argv.findIndex(v => v === '--timeout') + 1] : null) ?? process.env.TIMEOUT ?? 1000)));
 
     // Set screen size
-    const res = (process.env.RESOLUTION || process.argv.find(v => v === '--res') ? process.argv[process.argv.findIndex(v => v === '--res') + 1] : null) || '1280x640';
+    const res = (process.argv.find(v => v === '--res') ? process.argv[process.argv.findIndex(v => v === '--res') + 1] : null) || process.env.RESOLUTION || '1280x640';
     await page.setViewport({
       width: parseInt(res.split('x')[0]),
       height: parseInt(res.split('x')[1]),
