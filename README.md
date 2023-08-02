@@ -101,5 +101,5 @@ Make a file similar to the [template.html](./template.html) in this repository i
 
 ## 📜 License
 
-Copyright (c) 2023 Expo.<br/>
+Copyright (c) 2023 Nexus Networks.<br/>
 Licensed under the [MIT License](./LICENSE).
