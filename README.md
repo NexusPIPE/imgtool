@@ -15,6 +15,7 @@
     - [🗔 Specifying a Resolution](#-specifying-a-resolution)
     - [⏲ Specifying a Timeout](#-specifying-a-timeout)
     - [🧰 Using a custom template](#-using-a-custom-template)
+    - [📤 Output and Save Options](#-output-and-save-options)
 - [📜 License](#-license)
 
 ## 📝 Todo
@@ -98,6 +99,18 @@ to your arguments. This will make the CLI wait 1000ms before taking the screensh
 #### 🧰 Using a custom template
 
 Make a file similar to the [template.html](./template.html) in this repository in the folder you run the CLI in, and it will use that.
+
+#### 📤 Output and Save Options
+Saving to a Specific Path
+Add:
+
+`--output path/to/save/image.png`
+This will save the generated image to the specified path.
+
+##### Opening the Generated Image
+To automatically open the generated image after it's created, use:
+`--open`
+
 
 ## 📜 License
 
