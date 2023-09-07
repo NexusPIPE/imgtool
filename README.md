@@ -109,9 +109,6 @@ This will save the generated image to the specified path.
 
 ##### Opening the Generated Image
 To automatically open the generated image after it's created, use:
-
-bash
-Copy code
 `--open`
 
 
