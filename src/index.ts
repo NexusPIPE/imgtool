@@ -98,10 +98,10 @@ const templ = (template?: string, title = 'NexusPIPE', value = 'Cybersecurity wi
     },
   );
 
-  const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
+  const hexColorRegex = /^#([a-f0-9]{6}|[a-f0-9]{8})$/iu;
 
   if (!hexColorRegex.test(bgColor)) {
-      console.error("Invalid hex color format! Please ensure the hex format is correct (i.e. ##1a181844) and try again");
+      console.error("Invalid hex color format! Please ensure the hex format is correct (i.e. #1a181844) and try again");
       process.exit(1);
   }  
 
