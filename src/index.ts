@@ -4,11 +4,6 @@ import prompts = require('prompts');
 import * as fs from 'fs';
 import * as path from 'path';
 
-let open;
-(async () => {
-  open = (await import('open')).default;
-})();
-
 let templateData = {
   url: "https://workload.astolfo.gay/bg.png",
   top_text: "NexusPIPE",
@@ -32,30 +27,30 @@ const templ = (template?: string, title = 'NexusPIPE', value = 'Cybersecurity wi
   .replace(/%IMAGE%/gui, image)
   .replace(/%BGCOLOR%/gui, bgColor);
 
+const templateArgIndex = process.argv.indexOf('--template');
 
-  const templateArgIndex = process.argv.indexOf('--template');
+if (templateArgIndex !== -1 && process.argv[templateArgIndex + 1]) {
+  const templatePath = path.resolve(__dirname, '..', 'templates', process.argv[templateArgIndex + 1]);
 
-  if (templateArgIndex !== -1 && process.argv[templateArgIndex + 1]) {
-    const templatePath = path.resolve(__dirname, '..', 'templates', process.argv[templateArgIndex + 1]);
-  
-    try {
-      const rawData = fs.readFileSync(templatePath, 'utf-8');
-      const parsedData = JSON.parse(rawData);
-      
-      if (parsedData.url && parsedData.top_text && parsedData.main_text && parsedData.font) {
-        templateData = parsedData;
+  try {
+    const rawData = fs.readFileSync(templatePath, 'utf-8');
+    const parsedData = JSON.parse(rawData);
 
-      } else {
-        console.warn("Some template fields are missing in the JSON file. Using default values.");
-      }
+    if (parsedData.url && parsedData.top_text && parsedData.main_text && parsedData.font) {
+      templateData = parsedData;
 
-    } catch (err) {
-  console.warn(`Template retrieval error: ${err.message}. Using default values.`);
+    } else {
+      console.warn("Some template fields are missing in the JSON file. Using default values.");
     }
+
+  } catch (err) {
+    console.warn(`Template retrieval error: ${err.message}. Using default values.`);
   }
+}
 
 (async () => {
   console.log('\x1b[0;37mNote: The background image prompt is either an absolute URL or a relative path to the image file. If you are using a relative path, make sure the image file is relative to: ' + process.cwd() + '\x1b[0m');
+  const open = (await import('open')).default;
 
   const { url, title, value, font, bgColor } = await prompts(
     [
@@ -87,7 +82,7 @@ const templ = (template?: string, title = 'NexusPIPE', value = 'Cybersecurity wi
         type: 'text',
         name: 'bgColor',
         message: 'Enter the background color for the text (e.g., #1a181844)',
-        initial: templateData.bg_color  
+        initial: templateData.bg_color
       }
     ],
     {
@@ -101,28 +96,28 @@ const templ = (template?: string, title = 'NexusPIPE', value = 'Cybersecurity wi
   const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
 
   if (!hexColorRegex.test(bgColor)) {
-      console.error("Invalid hex color format! Please ensure the hex format is correct (i.e. ##1a181844) and try again");
-      process.exit(1);
-  }  
+    console.error("Invalid hex color format! Please ensure the hex format is correct (i.e. ##1a181844) and try again");
+    process.exit(1);
+  }
 
   const saveTemplateArgIndex = process.argv.indexOf('--savetemplate');
 
   if (saveTemplateArgIndex !== -1 && process.argv[saveTemplateArgIndex + 1]) {
     const newTemplatePath = path.resolve(__dirname, '..', 'templates', process.argv[saveTemplateArgIndex + 1]);
-    
+
     const newTemplateData = {
-        url: url,
-        top_text: title,
-        main_text: value,
-        font: font
+      url: url,
+      top_text: title,
+      main_text: value,
+      font: font
     };
-    
+
     try {
-        fs.writeFileSync(newTemplatePath, JSON.stringify(newTemplateData, null, 2));
-        console.log(`Template saved to ${newTemplatePath}`);
+      fs.writeFileSync(newTemplatePath, JSON.stringify(newTemplateData, null, 2));
+      console.log(`Template saved to ${newTemplatePath}`);
 
     } catch (err) {
-        console.warn(`Error saving template: ${err.message}`);
+      console.warn(`Error saving template: ${err.message}`);
     }
   }
 
@@ -135,7 +130,7 @@ const templ = (template?: string, title = 'NexusPIPE', value = 'Cybersecurity wi
   const generatedHTML = templ(fs.existsSync(process.cwd() + '/template.html') ? fs.readFileSync(process.cwd() + '/template.html', 'utf-8') : undefined, title, value, url, font, bgColor);
   console.log(generatedHTML);
   fs.writeFileSync(`./${id}.html`, generatedHTML);
-  */  
+  */
 
   const app = express();
   app.use(express.static(process.cwd()));
@@ -161,15 +156,15 @@ const templ = (template?: string, title = 'NexusPIPE', value = 'Cybersecurity wi
       outputPath = path.resolve(process.argv[outputArgIndex + 1]);
       // Check if outputPath is a directory
       if (fs.existsSync(outputPath) && fs.statSync(outputPath).isDirectory()) {
-          outputPath = path.join(outputPath, 'output.png');  // append a default filename, woo!
+        outputPath = path.join(outputPath, 'output.png');  // append a default filename, woo!
       }
-  
+
       // Ensure outputPath ends with a valid image extension
       const validExtensions = ['.png', '.jpeg', '.jpg', '.webp'];
       if (!validExtensions.some(ext => outputPath.toLowerCase().endsWith(ext))) {
-          outputPath += '.png';
+        outputPath += '.png';
       }
-  }
+    }
 
     await page.screenshot({ path: outputPath });
     console.log(`Image saved to ${outputPath}`);
