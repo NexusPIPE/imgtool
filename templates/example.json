@@ -1,7 +1,7 @@
 {
   "url": "https://workload.astolfo.gay/bg2.png",
-  "top_text": "NexusPIPE",
-  "main_text": "Experience Better Performance at NexusPIPE!",
-  "font": "Cera Pro"
-  "bg_color": "#1a181844"
+  "topText": "NexusPIPE",
+  "mainText": "Experience Better Performance at NexusPIPE!",
+  "font": "Cera Pro",
+  "bgColour": "#1a181844"
 }
