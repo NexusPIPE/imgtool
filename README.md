@@ -48,18 +48,18 @@
 git clone git@github.com:Exponential-Workload/imgtool.git ~/imgtool;
 # Enter the repository
 cd ~/imgtool;
-# Install dependencies
-pnpm i;
-echo "export PATH=$PATH:~/imgtool/bin" >> ~/.bashrc;echo "export PATH=$PATH:~/imgtool/bin" >> ~/.zshrc;export PATH=$PATH:~/imgtool/bin
+# Run install script
+./install.sh;
 ```
 
 ### 🪟 Windows Users
 
-```bash
+```batch
 cd %USERPROFILE%
 git clone git@github.com:Exponential-Workload/imgtool.git imgtool;
-cd ~/imgtool;
+cd imgtool;
 pnpm i;
+pnpm build;
 ```
 
 ## 🏃 Usage
@@ -70,6 +70,7 @@ pnpm i;
 
 ```bash
 imgtool
+# in development, use 'pnpm dev' in the repo's directory instead.
 ```
 
 #### 🪟 Windows Users
@@ -77,6 +78,7 @@ imgtool
 ```batch
 cd %USERPROFILE%\imgtool;
 pnpm start
+@REM for development, use 'pnpm dev' instead
 ```
 
 ### 🔧 Config
