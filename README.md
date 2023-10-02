@@ -48,9 +48,8 @@
 git clone git@github.com:Exponential-Workload/imgtool.git ~/imgtool;
 # Enter the repository
 cd ~/imgtool;
-# Install dependencies
-pnpm i;
-echo "export PATH=$PATH:~/imgtool/bin" >> ~/.bashrc;echo "export PATH=$PATH:~/imgtool/bin" >> ~/.zshrc;export PATH=$PATH:~/imgtool/bin
+# Run install script
+./install.sh;
 ```
 
 ### 🪟 Windows Users

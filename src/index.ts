@@ -16,10 +16,10 @@ let templateData = {
 
 const hexColourRegex = /^#?([a-f0-9]{3}|[a-f0-9]{4}|[a-f0-9]{6}|[a-f0-9]{8})$/ui;
 const outputArgIndex = proc.argv.indexOf('--output');
-let outputPath = 'output.png';  // default path
+let outputPath = process.env.DIR ? `${process.env.DIR}/output.png` : 'output.png';  // default path
 
 if (outputArgIndex !== -1 && proc.argv[outputArgIndex + 1]) {
-  outputPath = path.resolve(proc.argv[outputArgIndex + 1]);
+  outputPath = path.resolve(process.env.DIR, proc.argv[outputArgIndex + 1]);
 }
 
 const templ = (template?: string, title = 'NexusPIPE', value = 'Cybersecurity without compromises 🚀', image = 'https://workload.astolfo.gay/bg.png', font = 'Cera Pro', bgColour = '#1a181844') => (template ?? fs.readFileSync(__dirname + '/../template.html', 'utf-8'))

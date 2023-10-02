@@ -3,3 +3,4 @@ node_modules
 *.html
 !template.html
 output.png
+bin
