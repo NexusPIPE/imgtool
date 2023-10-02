@@ -4,3 +4,4 @@ node_modules
 !template.html
 output.png
 bin
+dist

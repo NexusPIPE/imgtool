@@ -2,8 +2,11 @@
   "name": "imgtool",
   "version": "1.0.0",
   "description": "Tool for creating social images",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node -r ts-node/register src/index",
+    "dev": "node -r ts-node/register src/index",
+    "build": "tsc",
+    "start": "node .",
     "postinstall": "pnpm exec playwright install firefox chromium"
   },
   "devDependencies": {

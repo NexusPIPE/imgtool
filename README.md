@@ -54,11 +54,12 @@ cd ~/imgtool;
 
 ### 🪟 Windows Users
 
-```bash
+```batch
 cd %USERPROFILE%
 git clone git@github.com:Exponential-Workload/imgtool.git imgtool;
 cd ~/imgtool;
 pnpm i;
+pnpm build;
 ```
 
 ## 🏃 Usage

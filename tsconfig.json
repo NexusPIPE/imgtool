@@ -12,6 +12,10 @@
     "target": "ESNext",
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "checkJs": false,
+    "skipLibCheck": true
   }
 }

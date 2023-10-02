@@ -14,7 +14,13 @@ pnpm start \$@" > $BIN
 chmod +x $BIN;
 
 # Install dependencies
-pnpm i;
+if command -v pnpm &>/dev/null; then
+  pnpm i;
+  pnpm build;
+else
+  echo -e "\x1b[0;41m FATAL \x1b[0m\x1b[0;31m\x1b[0;41m\x1b[0m\x1b[0;31m\x1b[0m\x1b[0;31m\x1b[0m \x1b[0;93mPNPM\x1b[0m is not installed. Please install it from \x1b[0;94mhttps://pnpm.io/installation\x1b[0m"
+  exit 1;
+fi
 
 # Link entrypoint
 if [ -d "$HOME/.local/bin" ]; then
@@ -35,7 +41,7 @@ elif [ -d "/usr/bin" ]; then
   sudo ln -s $BIN "/usr/bin/";
 else
   # Completely give up
-  echo "I give up - I don't know where your binary dir is"
+  echo -e "\x1b[0;41m FATAL \x1b[0m I give up - I don't know where your binaries live. Please link \x1b[0;94m$BIN\x1b[0m to a file named '\x1b[0;92mimgtool\x1b[0m' in your bin dir";
   exit 1;
 fi;
 
