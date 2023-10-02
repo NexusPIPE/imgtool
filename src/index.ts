@@ -1,4 +1,4 @@
-import * as puppeteer from 'puppeteer';
+import * as playwright from 'playwright';
 import express from 'express';
 import prompts = require('prompts');
 import * as fs from 'fs';
@@ -131,21 +131,21 @@ if (templateArgIndex !== -1 && proc.argv[templateArgIndex + 1]) {
   app.use(express.static(proc.cwd()));
   app.listen(11634, async () => {
     console.log('Server running on port 11634')
-    const browser = await puppeteer.launch({
-      headless: proc.env.DEBUG_HEADFUL ? false : 'new',
+    const browser = await playwright[process.env.USE_FIREFOX ? 'firefox' : 'chromium' /* default will be changed to firefox once it's screenshot tool has backdrop-blur working */].launch({
+      headless: proc.env.DEBUG_HEADFUL ? false : true,
     });
     const page = await browser.newPage();
 
-    await page.goto('http://127.0.0.1:11634/' + id + '.html', { waitUntil: 'networkidle2' });
-
-    await new Promise((resolve) => setTimeout(resolve, Number((proc.argv.find(v => v === '--timeout') ? proc.argv[proc.argv.findIndex(v => v === '--timeout') + 1] : null) ?? proc.env.TIMEOUT ?? 1000)));
+    await page.goto('http://127.0.0.1:11634/' + id + '.html', { waitUntil: 'networkidle' });
 
     // Set screen size
     const res = (proc.argv.find(v => v === '--res') ? proc.argv[proc.argv.findIndex(v => v === '--res') + 1] : null) || proc.env.RESOLUTION || '1280x640';
-    await page.setViewport({ // 1280x640 is the recommended size for the screenshot
+    await page.setViewportSize({ // 1280x640 is the recommended size for the screenshot
       width: parseInt(res.split('x')[0]),
       height: parseInt(res.split('x')[1]),
     });
+
+    await new Promise((resolve) => setTimeout(resolve, Number((proc.argv.find(v => v === '--timeout') ? proc.argv[proc.argv.findIndex(v => v === '--timeout') + 1] : null) ?? proc.env.TIMEOUT ?? 1000)));
 
     if (outputArgIndex !== -1 && proc.argv[outputArgIndex + 1]) {
       outputPath = path.resolve(proc.argv[outputArgIndex + 1]);
